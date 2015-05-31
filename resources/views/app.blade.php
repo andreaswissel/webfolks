@@ -34,7 +34,7 @@
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="/profile"><i class="glyphicon glyphicon-user"></i> Mein Profil</a></li>
                             <li><a href="/backend"><i class="glyphicon glyphicon-cog"></i> Einstellungen</a></li>
@@ -56,9 +56,9 @@
     </main>
     <!-- JavaScript plugins (requires jQuery) -->
     <!--<script src="http://code.jquery.com/jquery.js"></script>-->
-    <script src="view/js/jquery.js"></script>
+    <script src="{{ URL::asset('js/jquery.js') }}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="view/js/bootstrap.min.js"></script>
-    <script src="view/js/main.js"></script>
+    <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ URL::asset('js/main.js') }}"></script>
 </body>
 </html>
