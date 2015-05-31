@@ -12,9 +12,11 @@ class CategoryController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($category_id)
 	{
-		//
+    $category = \webfolks\Categories::all()->where('id', $category_id)->first();
+    $threads = \webfolks\Threads::all()->where('category_id', $category_id);
+    return view('forum.categories.threads', compact('category', 'threads'));
 	}
 
 	/**

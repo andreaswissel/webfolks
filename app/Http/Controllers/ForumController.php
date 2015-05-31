@@ -5,18 +5,17 @@ use webfolks\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class ThreadController extends Controller {
+class ForumController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index($thread_id)
+	public function index()
 	{
-    $thread = \webfolks\Threads::all()->where('id', $thread_id)->first();
-    $posts = \webfolks\Posts::all()->where('thread_id', $thread_id);
-    return view('forum.threads.list', compact('thread', 'posts'));
+    $categories = \webfolks\Categories::all();
+		return view('forum.categories.list', compact('categories'));
 	}
 
 	/**
@@ -47,9 +46,7 @@ class ThreadController extends Controller {
 	 */
 	public function show($id)
 	{
-		$thread = DB::select('select * from thread where id = '.$id);
-
-    return view('forum.thread', compact('thread'));
+		//
 	}
 
 	/**

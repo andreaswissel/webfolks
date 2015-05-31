@@ -14,7 +14,7 @@ class UsersController extends Controller {
 	 */
 	public function index()
 	{
-		return view('users.profile');
+
 	}
 
 	/**
@@ -81,4 +81,8 @@ class UsersController extends Controller {
 		//
 	}
 
+  public function displayProfile($id) {
+    $user = \webfolks\User::all()->where('id', $id)->first();
+    return view('users.profile', compact('user'));
+  }
 }
