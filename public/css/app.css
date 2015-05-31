@@ -1,0 +1,190 @@
+@import url("bootstrap-glyphicons.css");
+div.alertBox {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  height: auto;
+  width: 500px;
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  margin-left: -250px;
+  padding: 30px;
+  -webkit-border-radius: 5px; }
+  div.alertBox h1 {
+    margin-top: 0; }
+  div.alertBox p {
+    margin-bottom: 60px; }
+  div.alertBox button {
+    margin: 0 auto;
+    display: block; }
+
+.navbar {
+  background: #34495e;
+  border-bottom: 1px solid #3d566e;
+  margin-bottom: 0; }
+  .navbar a {
+    color: white; }
+  .navbar a:hover {
+    background: #428bca !important; }
+  .navbar li.open > a {
+    background: #428bca !important; }
+
+.jumbotron {
+  background: #34495e;
+  border-top: 1px solid #2b3c4e; }
+  .jumbotron h1 {
+    color: #428bca; }
+  .jumbotron p {
+    color: white; }
+
+.pt-left {
+  text-align: left !important; }
+
+.pt-right {
+  text-align: right !important; }
+
+section#dashboard-overview header h1 {
+  font: 500 24px Helvetica Neue, Helvetica, Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  padding-bottom: 10px; }
+section#dashboard-overview legend {
+  margin-top: 50px; }
+section#dashboard-overview section {
+  margin-top: 30px; }
+  section#dashboard-overview section h1 {
+    font: 500 20px Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: #00a185;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0;
+    margin-bottom: 10px; }
+  section#dashboard-overview section small {
+    display: block;
+    padding: 3px 0; }
+  section#dashboard-overview section ul {
+    margin-top: -10px;
+    padding: 0; }
+    section#dashboard-overview section ul li {
+      list-style: none;
+      border-top: 1px solid rbga(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+      section#dashboard-overview section ul li a {
+        display: block;
+        font: normal 14px Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 10px 5px; }
+        section#dashboard-overview section ul li a:hover {
+          text-decoration: none; }
+        section#dashboard-overview section ul li a i {
+          padding-top: 4px; }
+      section#dashboard-overview section ul li:hover {
+        background: rgba(0, 0, 0, 0.02); }
+  section#dashboard-overview section div.newsstream-item {
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
+    section#dashboard-overview section div.newsstream-item:not(:first-of-type) {
+      padding-top: 10px; }
+
+div.stats {
+  text-align: center; }
+  div.stats h1 {
+    font: 500 30px Helvetica Neue;
+    color: #428bca;
+    padding: 40px 0 50px 0; }
+
+.dropdown-menu > li > a {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 7px 10px; }
+  .dropdown-menu > li > a i {
+    padding-right: 10px; }
+
+section#forum-categories ul {
+  padding: 0; }
+  section#forum-categories ul li {
+    background: #888;
+    color: white;
+    list-style: none;
+    font: normal 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 20px 30px;
+    position: relative;
+    border-bottom: 1px solid #aaa; }
+    section#forum-categories ul li a {
+      color: white;
+      display: block;
+      text-decoration: none; }
+    section#forum-categories ul li:before {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      content: '';
+      height: 1px;
+      width: 100%;
+      background: #777; }
+    section#forum-categories ul li small {
+      display: block;
+      font-size: 13px;
+      color: #ccc;
+      padding: 5px 0; }
+    section#forum-categories ul li:nth-of-type(odd) {
+      background: #666;
+      border-bottom: 1px solid #aaa; }
+      section#forum-categories ul li:nth-of-type(odd):before {
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        content: '';
+        height: 1px;
+        width: 100%;
+        background: #555; }
+
+div.forum section.panel header h1 {
+  font: bold 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 5px 0; }
+div.forum section.panel header input {
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  font: bold 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #428bca;
+  border: 1px solid transparent;
+  border-radius: 3px 3px 0 0;
+  padding: 10px 15px; }
+  div.forum section.panel header input:active, div.forum section.panel header input:focus {
+    outline: none;
+    border: 1px solid #2A9BFD; }
+div.forum section.panel div.forum-post {
+  border-bottom: 1px solid #ddd; }
+  div.forum section.panel div.forum-post div.post-meta {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 7px 15px; }
+    div.forum section.panel div.forum-post div.post-meta:nth-of-type(1) {
+      border-top: 0; }
+  div.forum section.panel div.forum-post p {
+    padding: 15px; }
+
+section.answer {
+  display: none;
+  overflow: hidden;
+  padding: 15px 15px 15px 25px; }
+  section.answer header h1 {
+    font: bold 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #428bca; }
+  section.answer textarea {
+    margin: 20px 0;
+    min-height: 200px; }
+
+section.new {
+  display: block;
+  overflow: hidden;
+  padding: 15px 15px 15px 25px; }
+  section.new header h1 {
+    font: bold 16px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #428bca; }
+  section.new textarea {
+    margin: 20px 0;
+    min-height: 200px; }
+
+a.forum-link {
+  display: block; }
+
+/*# sourceMappingURL=main.css.map */
