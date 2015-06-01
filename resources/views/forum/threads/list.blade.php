@@ -12,7 +12,7 @@
         @foreach($posts as $post)
         <div class="post-meta">
           <div>
-            Geschrieben von <a href="/user/{{ $post->created_by }}/profile">user</a> am {{ $post->created_at }}
+            Geschrieben von <a href="/user/{{ $post->created_by }}/profile">{{ $post->name }}</a> am {{ $post->created_at }}
           </div>
         </div>
         <p>

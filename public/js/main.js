@@ -79,14 +79,27 @@ Form.prototype.handle = function(event) {
   }
 };
 
+Form.prototype.handleRedirect = function(response) {
+  var itemIdentifier = this.redirect.match("{(.*)}")[1];
+  var url = this.redirect.split('/');
+      url[url.length - 1] = response[itemIdentifier];
+  this.urlParams = url;
+
+  window.location.href = this.urlParser();
+};
+
 Form.prototype.triggerRequest = function() {
-  $.post(this.urlParser(), this.serialize()).done(function(data) {
+  $.post(this.urlParser(), this.serialize()).done((function(data) {
     var parsedResponse = JSON.parse(data);
 
     if(parsedResponse.success) {
-      window.location.reload();
+      if(this.redirect !== 'self') {
+        this.handleRedirect(parsedResponse);
+      } else {
+        window.location.reload();
+      }
     }
-  });
+  }).bind(this));
 };
 
 Form.prototype.urlParser = function() {

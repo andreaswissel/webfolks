@@ -16,7 +16,9 @@ class ThreadController extends Controller {
 	public function index($category_id, $thread_id)
 	{
     $thread = \webfolks\Threads::all()->where('id', $thread_id)->first();
-    $posts = \webfolks\Posts::all()->where('thread_id', $thread_id);
+    $posts = \webfolks\Posts::where('thread_id', $thread_id)
+      ->join('users', 'users.id', '=', 'posts.created_by')
+      ->get();
 
     return view('forum.threads.list', compact('thread', 'posts'));
 	}

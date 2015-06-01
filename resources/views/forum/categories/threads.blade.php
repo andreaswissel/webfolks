@@ -43,10 +43,10 @@
 
             </td>
             <td>
-              {{ $thread->created_by }}
+              {{ $thread->name }}
             </td>
             <td>
-              {{ date("d.m.Y h:m",strtotime($thread->created_at)) }}
+              {{ date("j. F Y G:s",strtotime($thread->created_at)) }}
             </td>
           </tr>
         @empty
