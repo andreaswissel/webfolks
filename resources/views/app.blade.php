@@ -62,6 +62,6 @@
     <script src="{{ URL::asset('js/jquery.js') }}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ URL::asset('js/main.js') }}"></script>
+    <script src="{{ URL::asset('js/app.js') }}"></script>
 </body>
 </html>
