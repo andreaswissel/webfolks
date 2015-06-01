@@ -21,6 +21,9 @@ Route::get('forum/category/{id}/thread/new', 'ThreadController@displayNewThread'
 Route::post('forum/category/{id}/thread/new', 'ThreadController@createNewThread');
 Route::get('forum/category/{category_id}/thread/{thread_id}', 'ThreadController@index');
 Route::post('forum/category/{category_id}/thread/{thread_id}/post/new', 'ThreadController@newAnswer');
+Route::post('forum/category/{category_id}/thread/{thread_id}/post/delete', 'ThreadController@deleteAnswer');
+Route::get('forum/category/{category_id}/thread/{thread_id}/post/edit', 'ThreadController@displayEditAnswer');
+Route::post('forum/category/{category_id}/thread/{thread_id}/post/edit', 'ThreadController@editAnswer');
 
 Route::get('user/{id}/profile', 'UsersController@displayProfile');
 

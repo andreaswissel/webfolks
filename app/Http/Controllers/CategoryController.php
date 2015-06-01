@@ -14,7 +14,7 @@ class CategoryController extends Controller {
 	 */
 	public function index($category_id)
 	{
-    $category = \webfolks\Categories::all()->where('id', $category_id)->first();
+    $category = \webfolks\Categories::where('id', $category_id)->first();
     $threads = \webfolks\Threads::where('category_id', $category_id)
       ->orderBy('threads.created_at', 'desc')
       ->join('users', 'users.id', '=', 'threads.created_by')

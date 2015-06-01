@@ -11,6 +11,18 @@
       <div class="forum-post">
         @foreach($posts as $post)
         <div class="post-meta">
+          <div class="pull-right">
+            <form class="ajaxForm" referencing="/forum/thread/{{ $thread->id }}/post/{{ $post->id }}" request="delete" redirect="self" confirmable="false">
+              <button class="btn">
+                Löschen
+              </button>
+            </form>
+            <form class="ajaxForm" referencing="/forum/thread/{{ $thread->id }}/post/{{ $post->id }}" request="edit" redirect="self" confirmable="false">
+              <button class="btn">
+                Editieren
+              </button>
+            </form>
+          </div>
           <div>
             Geschrieben von <a href="/user/{{ $post->created_by }}/profile">{{ $post->name }}</a> am {{ $post->created_at }}
           </div>
