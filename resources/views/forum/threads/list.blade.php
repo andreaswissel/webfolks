@@ -12,12 +12,12 @@
         @foreach($posts as $post)
         <div class="post-meta">
           <div class="pull-right">
-            <form class="ajaxForm" referencing="/forum/thread/{{ $thread->id }}/post/{{ $post->id }}" request="delete" redirect="self" confirmable="false">
+            <form ajax-form referencing="/forum/thread/{{ $thread->id }}/post/{{ $post->id }}" request="delete" redirect="self" confirmable="false">
               <button class="btn">
                 Löschen
               </button>
             </form>
-            <form class="ajaxForm" referencing="/forum/thread/{{ $thread->id }}/post/{{ $post->id }}" request="edit" redirect="self" confirmable="false">
+            <form ajax-form referencing="/forum/thread/{{ $thread->id }}/post/{{ $post->id }}" request="edit" redirect="self" confirmable="false">
               <button class="btn">
                 Editieren
               </button>
@@ -38,7 +38,7 @@
             Antworten
           </h1>
         </header>
-        <form class="ajaxForm" referencing="/forum/thread/{{ $thread->id }}" request="post/new" redirect="self" confirmable="false">
+        <form ajax-form referencing="/forum/thread/{{ $thread->id }}" request="post/new" redirect="self" confirmable="false">
           <fieldset>
             <textarea name="contents" class="form-control answerbox" id="answer" required></textarea>
             <input type="hidden" name="topic" value="{{ $thread->id }}" />

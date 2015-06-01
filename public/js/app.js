@@ -136,7 +136,7 @@ $(document).ready(function () {
     $('.answer-anchor').fadeOut();
   });
 
-  $('.ajaxForm').each(function() {
+  $('[ajax-form]').each(function() {
     new Form($(this));
   })
 
