@@ -30,11 +30,67 @@ AlertBox.prototype.discard = function() {
   }, 300);
 }
 
-function aBoxRM() {
-  $('body .alertBox').fadeOut(250);
-  setTimeout(function () {
-    $('body .alertBox').remove();
-  }, 300);
+function Form(element) {
+  var self = this;
+  this.element = element[0];
+  this.init();
+
+  this.element.addEventListener('submit', function(event) {
+    self.handle(event);
+  });
+};
+
+Form.prototype.init = function() {
+  this.referencing = $(this.element).attr('referencing');
+  this.request = $(this.element).attr('request');
+  this.confirmable = $(this.element).attr('confirmable');
+  this.redirect = $(this.element).attr('redirect');
+
+  this.urlParams = [this.referencing, this.request];
+};
+
+Form.prototype.validate = function() {
+  var valid = true;
+
+  $(this.element).find('.required').each(function (index, value) {
+    if ($.trim($(value).val()).length === 0) {
+      $(value).parent().parent().addClass("has-error");
+      valid = false;
+    } else {
+      $(value).parent().removeClass("error");
+      valid = true;
+    }
+  });
+
+  return valid;
+};
+
+Form.prototype.serialize = function() {
+  return $(this.element).serialize();
+};
+
+Form.prototype.handle = function(event) {
+  event.preventDefault();
+
+  if(this.validate()) {
+    this.triggerRequest();
+  } else {
+    throw new Error('form not valid')
+  }
+};
+
+Form.prototype.triggerRequest = function() {
+  $.post(this.urlParser(), this.serialize()).done(function(data) {
+    var parsedResponse = JSON.parse(data);
+
+    if(parsedResponse.success) {
+      window.location.reload();
+    }
+  });
+};
+
+Form.prototype.urlParser = function() {
+  return location.protocol + '//' + location.hostname + ':' + location.port + this.urlParams.join('/');
 }
 
 function scrollTo(element) {
@@ -42,92 +98,6 @@ function scrollTo(element) {
   $('html, body').animate({
     scrollTop: scroll
   }, 'slow');
-}
-
-function ajaxFormProcess(elem) {
-  var form = $(elem);
-  var referringTo = $(form).attr('refTo');
-  var request = $(form).attr('req');
-  var confirmable = $(form).attr('confirmable');
-  var ref = $(form).attr('ref');
-
-  var isFormValid = true;
-
-  $(".required").each(function (index, value) {
-    if ($.trim($(value).val()).length === 0) {
-      $(value).parent().parent().addClass("has-error");
-      isFormValid = false;
-    } else {
-      $(value).parent().removeClass("error");
-      isFormValid = true;
-    }
-  });
-
-  console.log('ajaxFormProcess()');
-
-  if (isFormValid) {
-    // Initialize @var temp
-    var temp = '';
-    // Serialize the form
-    temp = $(form).serializeArray();
-
-    console.log('trying to transfer ajax data');
-    console.log(temp);
-
-    $(form).fadeOut(250);
-
-    $.ajax({
-      type: "POST",
-      url: "index.php?page=" + referringTo + "&request=" + request,
-      data: temp
-    }).done(function (data) {
-      var data = JSON.parse(data);
-      //Debugging
-      //$('body').append(data);
-      if (data === "1") {
-        console.log('no errors, going on');
-        console.log('confirmable: ' + confirmable);
-        if (confirmable === 'true') {
-          console.log('form is confirmable');
-          new AlertBox('Erfolgreich', 'Das Formular wurde übermittelt.', true).spawn();
-          $('#form-confirm').click(function () {
-            window.location.href = '?page=' + ref;
-          });
-        } else {
-          new AlertBox('Erfolgreich', 'Das Formular wurde übermittelt.', true).spawn();
-          if (ref === 'self') {
-            console.log('referencing self');
-            setTimeout(function () {
-              window.location.reload();
-            }, 500);
-          } else {
-            setTimeout(function () {
-              window.location.href = './';
-            }, 500);
-          }
-        }
-      } else {
-        if(data.success) {
-          setTimeout(function () {
-            new AlertBox('Erfolgreich', 'Das Formular wurde übermittelt.', true).spawn();
-            if(data.url !== 'self') {
-             window.location.href = data.url;
-            } else {
-             window.location.reload();
-            }
-          }, 500);
-        } else {
-          console.log('error');
-          new AlertBox('Fehler', 'Meldung: ' + data, 'true').spawn();
-          $(form).fadeIn(250);
-        }
-      }
-    }).fail(function () {
-      new AlertBox('Fehler', 'Das Formular konnte nicht übermittelt werden.');
-    });
-  } else {
-    new AlertBox("Woops.", "Das hat nicht ganz gepasst. Bitte fülle die rot markierten Felder aus.");
-  }
 }
 
 function toggleAnswer(e) {
@@ -140,6 +110,12 @@ function toggleAnswer(e) {
 }
 
 $(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+    }
+  });
+
   $('.answer-anchor').on('click', function () {
     $('.answer').fadeIn(500);
     scrollTo($('.answer'));
@@ -147,10 +123,9 @@ $(document).ready(function () {
     $('.answer-anchor').fadeOut();
   });
 
-  $('.ajaxForm').on('submit', function (e) {
-    e.preventDefault();
-    ajaxFormProcess($(this));
-  });
+  $('.ajaxForm').each(function() {
+    new Form($(this));
+  })
 
   $('.answerbox').on('keypress', function (e) {
     if (e.which === 13 && e.shiftKey) {
