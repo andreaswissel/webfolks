@@ -134,8 +134,9 @@ $(document).ready(function () {
     }
   })
 
-  $('body').on('keydown', function (e) {
-    if (e.which === 82 && e.shiftKey) {
+  $(document).on('keydown', function (e) {
+    var forbiddenTags = ['input', 'textarea'];
+    if (forbiddenTags.indexOf(e.target.tagName.toLowerCase()) === -1 && e.which === 82 && e.shiftKey) {
       toggleAnswer(e);
     }
   });

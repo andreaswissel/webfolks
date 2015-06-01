@@ -9,7 +9,7 @@
     <section id="forum-categories"  class="panel panel-default clearfix">
       <header class="panel-heading">
         <h1>
-          <button class="btn btn-primary pull-right" href="/forum/category/{{ $category->id }}/new">
+          <button class="btn btn-primary pull-right" href="/forum/category/{{ $category->id }}/thread/new">
             Neues Thema
           </button>
           Themen

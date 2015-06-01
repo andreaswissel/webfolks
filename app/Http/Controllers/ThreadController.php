@@ -28,6 +28,10 @@ class ThreadController extends Controller {
     }
   }
 
+  public function displayNewThread(Request $request, $category_id) {
+    return view('forum.threads.new', compact('category_id'));
+  }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
