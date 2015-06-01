@@ -16,7 +16,7 @@
           </div>
         </div>
         <p>
-          {{ $post->contents }}
+          {!! nl2br(e($post->contents)) !!}
         </p>
         @endforeach
       </div>
@@ -26,9 +26,9 @@
             Antworten
           </h1>
         </header>
-        <form class="ajaxForm" refTo="forum" ref="self" req="saveAnswer" confirmable="false">
+        <form class="ajaxForm" referencing="/forum/thread/{{ $thread->id }}" request="post/new" redirect="self" confirmable="false">
           <fieldset>
-            <textarea name="contents" class="form-control answerbox" id="answer"></textarea>
+            <textarea name="contents" class="form-control answerbox" id="answer" required></textarea>
             <input type="hidden" name="topic" value="{{ $thread->id }}" />
             <input type="hidden" name="cat" value="{{ $thread->category_id }}" />
           </fieldset>

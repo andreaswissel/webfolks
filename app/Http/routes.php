@@ -18,6 +18,7 @@ Route::get('home', 'HomeController@index');
 Route::get('forum', 'ForumController@index');
 Route::get('forum/category/{id}', 'CategoryController@index');
 Route::get('forum/thread/{id}', 'ThreadController@index');
+Route::post('forum/thread/{id}/post/new', 'ThreadController@newAnswer');
 
 Route::get('user/{id}/profile', 'UsersController@displayProfile');
 

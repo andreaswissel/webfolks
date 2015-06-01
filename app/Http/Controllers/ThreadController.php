@@ -19,6 +19,15 @@ class ThreadController extends Controller {
     return view('forum.threads.list', compact('thread', 'posts'));
 	}
 
+  public function newAnswer(Request $request, $thread_id) {
+    $post = \webfolks\Posts::create(['contents' => nl2br($request->input('contents')), 'created_by' => $request->user()->id, 'category_id' => 1, 'thread_id' => $thread_id]);
+    if($post) {
+      print json_encode(['success' => true]);
+    } else {
+      print json_encode(['success' => false]);
+    }
+  }
+
 	/**
 	 * Show the form for creating a new resource.
 	 *
