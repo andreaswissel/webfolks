@@ -158,5 +158,5 @@ $(document).ready(function () {
     var url = $(this).attr('href');
 
     window.location.href = url;
-  })
+  });
 });
