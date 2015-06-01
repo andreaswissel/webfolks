@@ -28,6 +28,10 @@ Route::post('forum/category/{category_id}/thread/{thread_id}/post/edit', 'Thread
 Route::get('user/{id}/profile', 'UsersController@displayProfile');
 
 Route::controllers([
+  'api' => 'CategoryController'
+]);
+
+Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);

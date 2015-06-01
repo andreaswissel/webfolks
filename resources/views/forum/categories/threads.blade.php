@@ -9,7 +9,7 @@
     <section id="forum-categories"  class="panel panel-default clearfix">
       <header class="panel-heading">
         <h1>
-          <button class="btn btn-primary pull-right" href="/forum/category/{{ $category->id }}/thread/new">
+          <button class="btn btn-primary pull-right" href="{{ action('ThreadController@displayNewThread', [$category->id]) }}">
             Neues Thema
           </button>
           Themen
@@ -35,7 +35,7 @@
         @forelse($threads as $thread)
           <tr>
             <td>
-              <a href="/forum/category/{{ $category->id }}/thread/{{ $thread->id }}" class="forum-link">
+              <a href="{{ action('ThreadController@index', [$category->id, $thread->id]) }}" class="forum-link">
                 {{ $thread->title }}
               </a>
             </td>
@@ -58,7 +58,7 @@
         @endforelse
       </table>
     </section>
-    <button class="btn btn-primary pull-right" href="/forum/category/{{ $category->id }}/thread/new">
+    <button class="btn btn-primary pull-right" href="{{ action('ThreadController@displayNewThread', [$category->id]) }}">
       Neues Thema
     </button>
   </div>

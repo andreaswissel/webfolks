@@ -4,6 +4,8 @@ use League\Flysystem\Exception;
 use webfolks\Http\Requests;
 use webfolks\Http\Controllers\Controller;
 
+use webfolks\Threads;
+use webfolks\Posts;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller {
@@ -15,8 +17,8 @@ class ThreadController extends Controller {
 	 */
 	public function index($category_id, $thread_id)
 	{
-    $thread = \webfolks\Threads::where('id', $thread_id)->first();
-    $posts = \webfolks\Posts::where('thread_id', $thread_id)
+    $thread = Threads::find($thread_id)->first();
+    $posts = Posts::where('thread_id', $thread_id)
       ->join('users', 'users.id', '=', 'posts.created_by')
       ->get();
 
@@ -25,7 +27,7 @@ class ThreadController extends Controller {
 
   public function newAnswer(Request $request, $thread_id) {
     try {
-      $post = \webfolks\Posts::create(['contents' => nl2br($request->input('contents')), 'created_by' => $request->user()->id, 'category_id' => 1, 'thread_id' => $thread_id]);
+      $post = Posts::create(['contents' => nl2br($request->input('contents')), 'created_by' => $request->user()->id, 'category_id' => 1, 'thread_id' => $thread_id]);
       print json_encode(['success' => true, 'post_id' => $post->id]);
     } catch(Exception $e) {
       print json_encode(['success' => false, 'error' => $e]);
@@ -38,8 +40,8 @@ class ThreadController extends Controller {
 
   public function createNewThread(Request $request, $category_id) {
     try {
-      $thread = \webfolks\Threads::create(['title' => $request->input('title'), 'description' => $request->input('description'), 'contents' => $request->input('contents'), 'created_by' => $request->user()->id, 'category_id' => $category_id]);
-      \webfolks\Posts::create(['contents' => $request->input('contents'), 'created_by' => $request->user()->id, 'category_id' => $category_id, 'thread_id' => $thread->id]);
+      $thread = Threads::create(['title' => $request->input('title'), 'description' => $request->input('description'), 'contents' => $request->input('contents'), 'created_by' => $request->user()->id, 'category_id' => $category_id]);
+      Posts::create(['contents' => $request->input('contents'), 'created_by' => $request->user()->id, 'category_id' => $category_id, 'thread_id' => $thread->id]);
       print json_encode(['success' => true, 'thread_id' => $thread->id]);
     } catch(Exception $e) {
       print json_encode(['success' => false, 'error' => $e]);
