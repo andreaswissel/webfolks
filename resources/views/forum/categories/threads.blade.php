@@ -35,7 +35,7 @@
         @forelse($threads as $thread)
           <tr>
             <td>
-              <a href="/forum/thread/{{ $thread->id }}" class="forum-link">
+              <a href="/forum/category/{{ $category->id }}/thread/{{ $thread->id }}" class="forum-link">
                 {{ $thread->title }}
               </a>
             </td>
@@ -46,7 +46,7 @@
               {{ $thread->created_by }}
             </td>
             <td>
-              {{ $thread->created_at }}
+              {{ date("d.m.Y h:m",strtotime($thread->created_at)) }}
             </td>
           </tr>
         @empty
@@ -58,7 +58,7 @@
         @endforelse
       </table>
     </section>
-    <button class="btn btn-primary pull-right" href="/forum/category/{{ $category->id }}/new">
+    <button class="btn btn-primary pull-right" href="/forum/category/{{ $category->id }}/thread/new">
       Neues Thema
     </button>
   </div>

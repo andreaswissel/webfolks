@@ -1,5 +1,6 @@
 <?php namespace webfolks\Http\Controllers;
 
+use League\Flysystem\Exception;
 use webfolks\Http\Requests;
 use webfolks\Http\Controllers\Controller;
 
@@ -12,24 +13,35 @@ class ThreadController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($thread_id)
+	public function index($category_id, $thread_id)
 	{
     $thread = \webfolks\Threads::all()->where('id', $thread_id)->first();
     $posts = \webfolks\Posts::all()->where('thread_id', $thread_id);
+
     return view('forum.threads.list', compact('thread', 'posts'));
 	}
 
   public function newAnswer(Request $request, $thread_id) {
-    $post = \webfolks\Posts::create(['contents' => nl2br($request->input('contents')), 'created_by' => $request->user()->id, 'category_id' => 1, 'thread_id' => $thread_id]);
-    if($post) {
-      print json_encode(['success' => true]);
-    } else {
-      print json_encode(['success' => false]);
+    try {
+      $post = \webfolks\Posts::create(['contents' => nl2br($request->input('contents')), 'created_by' => $request->user()->id, 'category_id' => 1, 'thread_id' => $thread_id]);
+      print json_encode(['success' => true, 'post_id' => $post->id]);
+    } catch(Exception $e) {
+      print json_encode(['success' => false, 'error' => $e]);
     }
   }
 
   public function displayNewThread(Request $request, $category_id) {
     return view('forum.threads.new', compact('category_id'));
+  }
+
+  public function createNewThread(Request $request, $category_id) {
+    try {
+      $thread = \webfolks\Threads::create(['title' => $request->input('title'), 'description' => $request->input('description'), 'contents' => $request->input('contents'), 'created_by' => $request->user()->id, 'category_id' => $category_id]);
+      \webfolks\Posts::create(['contents' => $request->input('contents'), 'created_by' => $request->user()->id, 'category_id' => $category_id, 'thread_id' => $thread->id]);
+      print json_encode(['success' => true, 'thread_id' => $thread->id]);
+    } catch(Exception $e) {
+      print json_encode(['success' => false, 'error' => $e]);
+    }
   }
 
 	/**
