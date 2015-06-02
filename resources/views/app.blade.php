@@ -23,7 +23,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="/bootstrap">Bootstrap Example</a></li>
                             <li><a href="/">Index</a></li>
-                            <li><a href="/login">Login</a></li>
+                            <li><a href="/auth/login">Login</a></li>
                         </ul>
                     </li>
                     <li>
