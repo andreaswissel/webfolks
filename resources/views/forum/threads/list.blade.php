@@ -38,7 +38,7 @@
             Antworten
           </h1>
         </header>
-        <form ajax-form referencing="/forum/thread/{{ $thread->id }}" request="post/new" redirect="self" confirmable="false">
+        <form ajax-form referencing="/forum/category/{{ $category_id }}/thread/{{ $thread->id }}" request="post/new" redirect="self" confirmable="false">
           <fieldset>
             <textarea name="contents" class="form-control answerbox" id="answer" required></textarea>
             <input type="hidden" name="topic" value="{{ $thread->id }}" />

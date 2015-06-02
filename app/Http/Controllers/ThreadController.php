@@ -22,7 +22,7 @@ class ThreadController extends Controller {
       ->join('users', 'users.id', '=', 'posts.created_by')
       ->get();
 
-    return view('forum.threads.list', compact('thread', 'posts'));
+    return view('forum.threads.list', compact('thread', 'posts', 'category_id'));
 	}
 
   public function newAnswer(Request $request, $thread_id) {
